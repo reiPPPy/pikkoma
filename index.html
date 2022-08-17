@@ -20,6 +20,13 @@
 
   <body>
     <!--  -->
+    <script>
+      if (window == window.parent) {
+        if (screen.width > 1024) {
+          document.location = "./index_pc.html";
+        }
+      }
+    </script>
 
     <header class="header">
       <nav id="nav">
