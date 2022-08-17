@@ -435,8 +435,7 @@ body {
 }
 
 .title_1 {
-  display: flex;
-  justify-content: center;
+  text-align:center;
   padding-top: 12px;
 }
 
