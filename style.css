@@ -1,0 +1,835 @@
+/* フォントファイル読み込みのための記述 */
+/* @font-face {
+  font-family: "main-font";
+  src: url("./fonts/file-name.woff") format("woff");
+} */
+
+:root {
+  --color-main: #facf67;
+  --color-orange: #f08627;
+}
+
+body {
+  color: #806640;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+.menu4 {
+  width: 65px;
+  position: absolute;
+  top: 43px;
+  right: 2.5%;
+  animation-name: menu4back;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  position: fixed;
+  z-index: 4;
+}
+
+.menu1 {
+  width: 65px;
+  position: absolute;
+  right: 2.5%;
+  top: -10px;
+  position: fixed;
+  z-index: 4;
+}
+
+.menu2 {
+  width: 65px;
+  position: absolute;
+  top: 18.5px;
+  right: 2.5%;
+  /* display: absolute;
+  top:5px;
+  right: 0px; */
+  animation-name: menu2back;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  position: fixed;
+  z-index: 4;
+  /* cheese */
+}
+
+.menu3 {
+  width: 70px;
+  position: absolute;
+  top: 30px;
+  right: 2.1%;
+  animation-name: menu3back;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  position: fixed;
+  z-index: 4;
+  /* tomato */
+}
+
+.menu1-2 {
+  width: 65px;
+  display: none;
+  position: absolute;
+  right: 2.5%;
+  top: -10px;
+  position: fixed;
+  z-index: 4;
+}
+
+/* メニュー start　------------------------------------------------------------------------------------ */
+
+#nav {
+  position: fixed;
+  z-index: 999;
+  height: 0;
+  top: 0;
+  right: 0;
+}
+
+.menu {
+  position: absolute;
+  z-index: 2;
+  right: 20px;
+  top: 20px;
+  cursor: pointer;
+  display: block;
+  transition: all 0.4s;
+}
+
+.main-menu {
+  position: relative;
+  z-index: 1;
+  pointer-events: none;
+  width: max-content;
+}
+
+.main-menu .circle-bg {
+  position: absolute;
+  top: -160px;
+  right: -83px;
+  /*丸の形*/
+  width: 442px;
+  height: 450px;
+  border-radius: 50%;
+  background: linear-gradient(#fbe8c8, #f8b62d);
+  /*丸のスタート位置と形状*/
+  transform: scale(0); /*scaleをはじめは0に*/
+  transition: all 0.4s; /*0.6秒かけてアニメーション*/
+}
+
+.main-menu ul {
+  position: relative;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.2s;
+  padding-right: 80px;
+  padding-top: 11px;
+}
+
+.main-menu ul li a {
+  color: #8a5702;
+  text-decoration: none;
+  padding: 18px;
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: bold;
+  font-size: 20px;
+  font-family: "ヒラギノ角ゴ ProN";
+  position: relative;
+}
+
+/* todo */
+#nav li.current a,
+#nav li a:hover {
+  color: #90b045;
+}
+#nav li a::after {
+  content: "";
+  /*絶対配置で線の位置を決める*/
+  position: absolute;
+  bottom: 0;
+  left: 5%;
+  /*線の形状*/
+  width: 80%;
+  height: 2px;
+  background: #90b045;
+  /*アニメーションの指定*/
+  transition: all 0.3s;
+  transform: scale(0, 1); /*X方向0、Y方向1*/
+  transform-origin: left top; /*左上基点*/
+}
+/*現在地とhoverの設定*/
+#nav li.current a::after,
+#nav li a:hover::after {
+  transform: scale(0.3, 1); /*X方向にスケール拡大*/
+}
+/* todo */
+
+/* メニュークリック時 start--------------------- */
+#nav.menu-active .menu1 {
+  /* transform: translateY(10px); */
+}
+#nav.menu-active .menu2 {
+  animation-name: menu2Anime;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+#nav.menu-active .menu3 {
+  animation-name: menu3Anime;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+#nav.menu-active .menu4 {
+  animation-name: menu4Anime;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+#nav.menu-active .menu1-2 {
+  display: block;
+}
+
+#nav.menu-active .circle-bg {
+  transform: scale(1);
+}
+
+#nav.menu-active .main-menu ul {
+  opacity: 1;
+}
+
+#nav.menu-active .main-menu {
+  pointer-events: auto;
+}
+
+@keyframes menu2Anime {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(10px);
+  }
+}
+@keyframes menu3Anime {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(20px);
+  }
+}
+@keyframes menu4Anime {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(30px);
+  }
+}
+@keyframes menu2back {
+  from {
+    transform: translateY(10px);
+  }
+  to {
+    transform: translateY(0px);
+  }
+}
+@keyframes menu3back {
+  from {
+    transform: translateY(20px);
+  }
+  to {
+    transform: translateY(0px);
+  }
+}
+@keyframes menu4back {
+  from {
+    transform: translateY(30px);
+  }
+  to {
+    transform: translateY(0px);
+  }
+}
+
+/* メニュークリック時 end--------------------- */
+
+.menu4.active {
+  animation-name: menu4Anime;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+.menu1-2.active {
+  display: block;
+}
+*/
+
+/* ハンバーガーアニメーション */
+
+
+
+/* アニメーションfin */
+
+
+
+.overlay {
+  display: none; /* input にチェックが入るまでは非表示に */
+}
+
+.overlay2 {
+  display: none; /* input にチェックが入るまでは非表示に */
+}
+.open {
+  cursor: pointer;
+  /* マウスオーバーでカーソルの形状を変えることで、クリックできる要素だとわかりやすいように */
+  /* display: block; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  width: 205px;
+  padding: 10px 30px;
+  margin: 30px auto;
+  border-radius: 35px;
+  background-color: white;
+}
+/*hoverした際の、背景の場所とテキスト色の変更*/
+.open:hover {
+  color: var(--color-orange);
+  background-position: 99% 50%;
+}
+
+/* .menu {
+  cursor: pointer;
+  display: block;
+  transition: all 0.4s;
+  position: relative;
+z-index: 9999999; */
+/* ボタンを最前面に */
+/* } */
+/* .menu:hover {
+  opacity: 0.7;
+  color: white;
+} */
+
+#pop-up {
+  display: none; /* label でコントロールするので input は非表示に */
+}
+/* #humburgar{
+  display: none;
+} */
+
+.overlay {
+  display: none; /* input にチェックが入るまでは非表示に */
+}
+.overlay2 {
+  display: none;
+}
+
+#pop-up:checked + .overlay {
+  animation-name: fadeInAnime;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  opacity: 0;
+
+  display: block;
+  z-index: 9999;
+  background-color: #00000070;
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+}
+
+.window {
+  width: 90vw;
+  max-width: 380px;
+  height: 240px;
+  /* background-color: #ffffff; */
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.popupic {
+  width: 305px;
+  position: relative;
+}
+
+/* .change{
+
+} */
+
+.text {
+  font-size: 18px;
+  margin: 0;
+}
+.close {
+  cursor: pointer;
+  font-weight: bold;
+  position: absolute;
+  top: -6px;
+  right: 20px;
+  font-size: 50px;
+  z-index: 1;
+  color: black;
+}
+
+/* .menu_close{
+  cursor:pointer;
+} */
+
+@keyframes fadeInAnime {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+body {
+  background-image: url(./images/background_2.png);
+  /* background-repeat: repeat; */
+  background-size: 500px;
+  font-family: "Hiragino Kaku Gothic Pro";
+}
+
+.title {
+  padding-top: 75px;
+  height: 750px;
+  width: 100vw;
+  background-image: url(./images/bg-title.svg);
+  background-repeat: no-repeat;
+  background-size: 100% 750px;
+}
+
+.mog {
+  width: 180px;
+}
+
+.share {
+  font-size: 13px;
+  text-align: center;
+}
+
+.service {
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.start {
+  font-size: 16px;
+  width: 172px;
+  padding: 10px 30px;
+  margin: 30px auto;
+  border-radius: 35px;
+  background-color: white;
+}
+
+.title_1 {
+  display: flex;
+  justify-content: center;
+  padding-top: 12px;
+}
+
+.cg {
+  position: relative;
+  width: 100%;
+  height: 490px;
+}
+
+.cg1 {
+  height: 220px;
+  position: absolute;
+  bottom: 0%;
+  right: 12%;
+}
+
+.cg2 {
+  height: 111px;
+  position: absolute;
+  right: 27%;
+  top: 5%;
+}
+
+.cg3 {
+  width: 207px;
+  /* height: 480px; */
+  /* object-fit: cover;
+  object-position: 100% 0; */
+  position: absolute;
+  top: 18%;
+}
+
+.cg4 {
+  position: absolute;
+  top: -23px;
+  left: -11px;
+  width: 144px;
+}
+
+.cg5 {
+  width: 127px;
+  position: absolute;
+  bottom: 20%;
+  right: 10%;
+}
+
+.cg6 {
+  position: absolute;
+  right: 5%;
+  width: 100px;
+}
+
+.cg7 {
+  height: 80px;
+  position: absolute;
+  right: 5%;
+  top: 40%;
+}
+
+.cg8 {
+  height: 122px;
+  position: absolute;
+  left: 35%;
+  top: 25%;
+}
+
+.cg9 {
+  position: absolute;
+  width: 370px;
+  height: 515px;
+  top: -4%;
+  left: -1%;
+  object-fit: cover;
+  object-position: 100% 0;
+  position: absolute;
+}
+
+.cg10 {
+  height: 82px;
+  position: absolute;
+  top: 33%;
+  left: 60%;
+}
+
+.cg11 {
+  height: 100px;
+  position: absolute;
+  bottom: 39%;
+  left: 26%;
+}
+
+.pic {
+  content: "";
+  height: 70px;
+  width: 70px;
+  margin: 0 12px 0 0;
+  /* background-color: white; */
+}
+
+.about {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+}
+
+.about_block {
+  text-align: center;
+  padding: 20px 30px;
+  margin: auto;
+  border-radius: 41px;
+  background-color: rgba(255, 255, 255, 0.85);
+}
+
+/* .white_block{
+  padding-top: 124px;
+  padding-bottom: 124px;
+} */
+
+.about_title {
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+.about1 {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin: 0 0 30px 0;
+  line-height: 3em;
+}
+
+.about2 {
+  font-size: 12px;
+  text-align: center;
+  line-height: 4em;
+  margin-bottom: 50px;
+}
+
+.howtouse {
+  padding-top: 70px;
+  height: 900px;
+  width: 100vw;
+  position: relative;
+}
+
+.howbg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 850px;
+}
+
+.howbg > path {
+  transition: fill 400ms;
+  fill: #facf67;
+}
+
+.how {
+  text-align: center;
+}
+
+.howp {
+  color: #8a5702;
+  text-align: center;
+  margin: 5px;
+}
+
+.step-container {
+  position: relative;
+  width: 246px;
+  height: 539px;
+  margin: 0 auto;
+  margin-top: 30px;
+}
+
+.stepnum {
+  position: absolute;
+  z-index: 2;
+  top: -30px;
+  left: -60px;
+  text-align: center;
+  background-color: #f08627;
+  color: #fff;
+  border-radius: 50%;
+  width: 130px;
+  height: 130px;
+  padding-top: 25px;
+}
+
+.step {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.num {
+  font-size: 51px;
+  font-weight: bold;
+}
+
+.use {
+  text-align: center;
+  font-size: 20px;
+  margin-top: 23px;
+}
+
+.download {
+  height: 100vh;
+  display: flex;
+  padding-top: 60px;
+  justify-content: center;
+  align-items: center;
+}
+
+.button {
+  padding: auto;
+}
+
+.button_block {
+  background-color: rgba(255, 255, 255, 0.85);
+  width: 309px;
+  border-radius: 41px;
+  text-align: center;
+  padding-top: 23px;
+  padding-bottom: 35px;
+  margin: auto;
+}
+
+.letstry {
+  font-size: 36px;
+  font-weight: bold;
+}
+
+.app {
+  height: 300px;
+  border-radius: 5%;
+  /* background-color: grey; */
+}
+
+.appstore {
+  margin-top: 19px;
+}
+
+.googleplay {
+  margin-top: 19px;
+}
+
+.gazou {
+  width: 100%;
+  display: flex;
+  margin: 17px auto;
+  margin-top: 17px;
+  justify-content: center;
+}
+
+.scene2 {
+  position: relative;
+  top: 75px;
+  left: -17px;
+}
+
+.footer {
+  height: 270px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background-color: white;
+  padding-bottom: 40px;
+}
+.wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+/* ------------ */
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+
+  /* Center slide text vertically */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.swiper-pagination-bullet {
+  background-color: yellowgreen;
+}
+
+@media screen and (min-width: 750px) {
+  .about_block {
+    width: 600px;
+  }
+
+  .howbg {
+    height: 1000px;
+  }
+  .step-container {
+    width: 300px;
+    height: 657px;
+  }
+  .cg1 {
+    height: 330px;
+    right: 18%;
+  }
+
+  .cg2 {
+    height: 192px;
+  }
+
+  .cg3 {
+    width: 271px;
+    top: -12%;
+    left: 11%;
+  }
+
+  .cg5 {
+    width: 238px;
+    bottom: 53%;
+    right: 5%;
+  }
+
+  .cg6 {
+    right: 25%;
+    top: -15%;
+  }
+
+  .cg7 {
+    height: 150px;
+    right: 5%;
+    top: 15%;
+  }
+  .cg10 {
+    height: 137px;
+    top: 38%;
+    left: 67%;
+  }
+
+  .cg11 {
+    height: 145px;
+    bottom: 34%;
+    left: 37%;
+  }
+
+  .about1 {
+    font-size: 30px;
+    line-height: 2em;
+  }
+
+  .about2 {
+    font-size: 17px;
+    padding: 20px;
+    line-height: 2em;
+  }
+
+  .letstry {
+    font-size: 55px;
+  }
+
+  .button_block {
+    width: 600px;
+    padding-top: 75px;
+    padding-bottom: 80px;
+    margin-top: 200px;
+  }
+
+  .app {
+    height: 381px;
+  }
+}

@@ -1,0 +1,407 @@
+/* フォントファイル読み込みのための記述 */
+/* @font-face {
+  font-family: "main-font";
+  src: url("./fonts/file-name.woff") format("woff");
+} */
+
+/* Loading背景画面設定　*/
+#splash {
+  /*fixedで全面に固定*/
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 99999;
+  background: #fbe8c8;
+  text-align: center;
+  color: #fff;
+}
+
+/* Loading画像中央配置　*/
+#splash_logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Loading アイコンの大きさ設定　*/
+#splash_logo svg {
+  width: 300px;
+}
+
+/*アニメーション前の指定*/
+#mask path {
+  fill-opacity: 0; /*最初は透過0で見えない状態*/
+  transition: fill-opacity 0.5s; /*カラーがつく際のアニメーション0.5秒で変化*/
+  fill: none; /*塗りがない状態*/
+  stroke: #f0b22c; /*線の色*/
+}
+
+/*アニメーション後に.doneというクラス名がで付与された時の指定*/
+#mask.done path {
+  fill: #f0b22c; /*塗りの色*/
+  fill-opacity: 1; /*透過1で見える状態*/
+  stroke: none; /*線の色なし*/
+}
+
+body {
+  background-image: url("images_pc/shop.png");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.menu1 {
+  position: absolute;
+  top: 10px;
+  right: 2.5%;
+  z-index: 9999; /*ボタンを最前面に*/
+}
+.menu2 {
+  position: absolute;
+  top: 59.1px;
+  right: 2.5%;
+  z-index: 9999; /*ボタンを最前面に*/
+  animation-name: menu2back;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+.menu3 {
+  position: absolute;
+  top: 77px;
+  right: -1.8%;
+  z-index: 9999; /*ボタンを最前面に*/
+  animation-name: menu3back;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+.menu4 {
+  position: absolute;
+  top: 98px;
+  right: 2.5%;
+  z-index: 9999; /*ボタンを最前面に*/
+  animation-name: menu4back;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+.menu1-2 {
+  display: none;
+  position: absolute;
+  top: 10px;
+  right: 2.5%;
+  z-index: 9999; /*ボタンを最前面に*/
+}
+
+.iframe-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  /* padding-top: 218px; */
+  /* align-items: flex-start; */
+  margin-bottom: 0px;
+  height: 100vh;
+}
+
+/* メニュー start　------------------------------------------------------------------------------------ */
+
+#nav {
+  position: fixed;
+  top: 0;
+  right: 0;
+}
+
+.menu {
+  position: fixed;
+  z-index: 9999999;
+  width: 120px;
+  height: 200px;
+  right: 20px;
+  top: 20px;
+  cursor: pointer;
+  display: block;
+  transition: all 0.4s;
+}
+
+.main-menu {
+  position: relative;
+  z-index: 1;
+  width: max-content;
+}
+
+.main-menu .circle-bg {
+  position: absolute;
+  top: -110px;
+  right: -120px;
+  /*丸の形*/
+  width: 620px;
+  height: 620px;
+  border-radius: 50%;
+  background: linear-gradient(#fbe8c8, #f8b62d);
+  /*丸のスタート位置と形状*/
+  transform: scale(0); /*scaleをはじめは0に*/
+  transition: all 0.4s; /*0.6秒かけてアニメーション*/
+}
+
+.main-menu ul {
+  position: relative;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.2s;
+  padding-right: 150px;
+  padding-top: 110px;
+}
+
+.main-menu ul li a {
+  color: #8a5702;
+  text-decoration: none;
+  padding: 25px;
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: bold;
+  font-size: 30px;
+  font-family: "ヒラギノ角ゴ ProN";
+  position: relative;
+}
+
+/* todo */
+#nav li.current a,
+#nav li a:hover {
+  color: #90b045;
+}
+#nav li a::after {
+  content: "";
+  /*絶対配置で線の位置を決める*/
+  position: absolute;
+  bottom: 0;
+  left: 5%;
+  /*線の形状*/
+  width: 80%;
+  height: 2px;
+  background: #90b045;
+  /*アニメーションの指定*/
+  transition: all 0.3s;
+  transform: scale(0, 1); /*X方向0、Y方向1*/
+  transform-origin: left top; /*左上基点*/
+}
+/*現在地とhoverの設定*/
+#nav li.current a::after,
+#nav li a:hover::after {
+  transform: scale(0.3, 1); /*X方向にスケール拡大*/
+}
+/* todo */
+
+/* メニュークリック時 start--------------------- */
+#nav.menu-active .menu1 {
+  /* transform: translateY(10px); */
+}
+#nav.menu-active .menu2 {
+  animation-name: menu2Anime;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+#nav.menu-active .menu3 {
+  animation-name: menu3Anime;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+#nav.menu-active .menu4 {
+  animation-name: menu4Anime;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+#nav.menu-active .menu1-2 {
+  display: block;
+}
+
+#nav.menu-active .circle-bg {
+  transform: scale(1);
+}
+
+#nav.menu-active .main-menu ul {
+  opacity: 1;
+}
+
+@keyframes menu2Anime {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(10px);
+  }
+}
+@keyframes menu3Anime {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(20px);
+  }
+}
+@keyframes menu4Anime {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(30px);
+  }
+}
+@keyframes menu2back {
+  from {
+    transform: translateY(10px);
+  }
+  to {
+    transform: translateY(0px);
+  }
+}
+@keyframes menu3back {
+  from {
+    transform: translateY(20px);
+  }
+  to {
+    transform: translateY(0px);
+  }
+}
+@keyframes menu4back {
+  from {
+    transform: translateY(30px);
+  }
+  to {
+    transform: translateY(0px);
+  }
+}
+
+/* メニュークリック時 end--------------------- */
+
+/* メニュー end　------------------------------------------------------------------------------------ */
+
+.overlay {
+  display: none; /* input にチェックが入るまでは非表示に */
+}
+.open {
+  cursor: pointer; /* マウスオーバーでカーソルの形状を変えることで、クリックできる要素だとわかりやすいように */
+  display: block;
+  background: linear-gradient(to right, #f08627, #facf67);
+  background-position: 1% 50%;
+  background-size: 200% auto;
+  transition: all 0.3s ease-out;
+  color: #fff;
+  font-size: 35px;
+  font-weight: bold;
+  font-family: "ヒラギノ角ゴ ProN";
+  text-align: center;
+  padding: 40px 0;
+  position: absolute;
+  left: 2%;
+  top: 75%;
+  width: 400px;
+  height: 128px;
+  border-radius: 30px;
+}
+/*hoverした際の、背景の場所とテキスト色の変更*/
+.open:hover {
+  color: #fff;
+  background-position: 99% 50%;
+}
+
+.pop{
+  width: 700px;
+}
+
+#pop-up {
+  display: none; /* label でコントロールするので input は非表示に */
+}
+/* #humburgar{
+  display: none;
+} */
+
+/* .overlay {
+	display: none; /* input にチェックが入るまでは非表示に */
+
+/* .overlay2{
+  display: none;
+} */
+
+#pop-up:checked + .overlay {
+  animation-name: fadeInAnime;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  opacity: 0;
+
+  display: block;
+  z-index: 9999;
+  background-color: #00000070;
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+}
+
+/* #humburgar:checked  + .overlay2{
+  display: block;
+	z-index: 9999;
+} */
+
+.window {
+  width: 90vw;
+  max-width: 380px;
+  height: 240px;
+  background-color: #ffffff;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* .change{
+
+} */
+
+.text {
+  font-size: 18px;
+  margin: 0;
+}
+.close {
+  cursor: pointer;
+  font-weight: bold;
+  position: absolute;
+  top: -150px;
+  left: 450px;
+  font-size: 50px;
+}
+
+/* .menu_close{
+  cursor:pointer;
+} */
+
+@keyframes fadeInAnime {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.phone {
+  width: 30%;
+  height: 80%;
+  border-style: solid;
+  border-width: 1ex;
+  border-radius: 20px;
+}
+
+@media screen and (max-width: 1400px) {
+  .open {
+    position: absolute;
+    left: 1%;
+    top: 3%;
+  }
+}
