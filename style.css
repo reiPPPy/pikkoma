@@ -832,3 +832,9 @@ body {
     height: 381px;
   }
 }
+
+@media screen and (max-height: 750px) {
+  .about2 {
+    line-height: 2em;
+  }
+}
